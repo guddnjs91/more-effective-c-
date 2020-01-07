@@ -44,6 +44,26 @@ String& String::operator=(const String& rhs)
     return *this;
 }
 
+// const operator[]
+const char& String::operator[](int index) const
+{
+    return value->data[index];
+}
+
+// non-const operator[]
+// NOTE: should consider caller object can modify this data, 
+// so apply copy-on-write here
+char& String::operator[](int index)
+{
+    if (value->refCount > 1)
+    {
+        --value->refCount;
+        value = new StringValue(value->data); // make copy (refCount=1)
+    }
+
+    return value->data[index];
+}
+
 void String::printStringValue()
 {
     printf("data=%p\n", value->data);

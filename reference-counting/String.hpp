@@ -8,6 +8,9 @@ public:
     String& operator=(const String& rhs);
     ~String();
 
+    const char& operator[](int index) const;
+    char& operator[](int index);
+
     void printStringValue();
 private:
     /* The purpose of StringValue is to give us place

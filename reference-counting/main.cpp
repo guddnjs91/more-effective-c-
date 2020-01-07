@@ -2,12 +2,17 @@
 #include "String.hpp"
 
 int main(void) {
-    String a, b, c, d, e;
-    a = b = c = d = e = "Hello";
+    String a, b;
+    a = b = "Hello";
 
     a.printStringValue();
     b.printStringValue();
-    c.printStringValue();
-    d.printStringValue();
-    e.printStringValue();
+
+    std::cout << a[0] << std::endl; //read
+    a.printStringValue();
+    b.printStringValue();
+
+    a[0] = 'h'; //write
+    a.printStringValue();
+    b.printStringValue();
 }
