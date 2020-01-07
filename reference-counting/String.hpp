@@ -19,6 +19,7 @@ private:
     struct StringValue
     {
         int refCount;
+        bool shareable;
         char *data;
 
         StringValue(const char* initValue);

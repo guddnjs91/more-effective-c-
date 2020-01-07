@@ -14,7 +14,14 @@ String::String(const String& rhs)
     : value(rhs.value)
 {
     printf("String copy constructur\n");
-    value->refCount++;
+    if (value->shareable)
+    {
+        value->refCount++;
+    }
+    else
+    {
+        value = new StringValue(value->data); // copy-on-write
+    }
 }
 
 // dtor
@@ -61,6 +68,11 @@ char& String::operator[](int index)
         value = new StringValue(value->data); // make copy (refCount=1)
     }
 
+    // Set shareable flag to false since who calls this operator
+    // could modify the shared value. Unfortunately, resetting this
+    // flag is non-trivial...
+    value->shareable = false;
+
     return value->data[index];
 }
 
@@ -69,10 +81,12 @@ void String::printStringValue()
     printf("data=%p\n", value->data);
     printf("data allocated size=%lu\n", sizeof(value->data));
     printf("reference count=%d\n", value->refCount);
+    printf("shareable==%s\n", (value->shareable ? "true" : "false"));
 }
 
 String::StringValue::StringValue(const char *initValue)
     : refCount(1)
+    , shareable(true)
 {
 	data = new char[strlen(initValue) + 1];
 	strcpy(data, initValue);
