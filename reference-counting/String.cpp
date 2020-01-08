@@ -85,8 +85,9 @@ void String::printStringValue()
 }
 
 String::StringValue::StringValue(const char *initValue)
-    : refCount(1)
-    , shareable(true)
+// FIXME
+//    : refCount(1)
+//    , shareable(true)
 {
 	data = new char[strlen(initValue) + 1];
 	strcpy(data, initValue);

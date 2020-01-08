@@ -5,7 +5,7 @@ TARGET = main
 
 # What needs to make target program
 OBJ_COMMON =
-OBJ = main.o String.o
+OBJ = main.o String.o RCObject.o
 
 # Compiler
 CC = g++
