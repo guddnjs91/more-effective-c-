@@ -13,7 +13,7 @@ class RCObject {
 
     friend class String;
 
-    public:
+public:
     RCObject();
     RCObject(const RCObject &rhs);
     RCObject& operator=(const RCObject& rhs);
@@ -26,7 +26,8 @@ class RCObject {
     bool isSharable() const;
     bool isShared() const;
 
-    private:
+    int getRefCount();
+private:
     int refCount;
     bool shareable;
 };

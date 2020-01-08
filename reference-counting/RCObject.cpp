@@ -5,7 +5,7 @@
 // NOTE: let creators of RCObject to set refCount to 1
 RCObject::RCObject()
 	: refCount(0)
-	  , shareable(true)
+	, shareable(true)
 {
 	printf("RCObject constructor\n");
 }
@@ -15,7 +15,7 @@ RCObject::RCObject()
 // again, let creators of RCObject to set refCount
 RCObject::RCObject(const RCObject&)
 	: refCount(0)
-	  , shareable(true)
+	, shareable(true)
 {
 	printf("RCObject copy constructor\n");
 }
@@ -40,6 +40,7 @@ RCObject& RCObject::operator=(const RCObject&)
 // dtor
 RCObject::~RCObject()
 {
+	printf("RCObject destructor\n");
 }
 
 void RCObject::addReference()
@@ -66,4 +67,9 @@ bool RCObject::isSharable() const
 bool RCObject::isShared() const
 {
 	return refCount > 1;
+}
+
+int RCObject::getRefCount()
+{
+    return refCount;
 }

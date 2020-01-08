@@ -2,12 +2,11 @@
 #define __STRING_HPP__
 
 #include "RCObject.hpp"
+#include "RCPtr.hpp"
 
 class String {
 public:
     String(const char *value = "");
-    String(const String& rhs);
-    String& operator=(const String& rhs);
     ~String();
 
     const char& operator[](int index) const;
@@ -25,9 +24,10 @@ private:
         char *data;
 
         StringValue(const char* initValue);
+        StringValue(const StringValue& rhs);
         ~StringValue();
     };
-    StringValue *value;
+    RCPtr<StringValue> value;
 };
 
 #endif //__STRING_HPP__
